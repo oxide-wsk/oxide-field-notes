@@ -138,7 +138,7 @@ oxide instance start --project PROJECT --instance ol10
 
 On the serial console you should see, without any manual steps: the GRUB menu, the NIC taking an address from DHCP, cloud-init finishing with `DataSourceNoCloud`, and a login prompt. Then `ssh admin@<external-ip>`. On the guest, `sudo cloud-init status` should report `done`.
 
-The NIC has a predictable name rather than `eth0` (`enp0s8` in testing). The installed system boots Oracle's UEK kernel by default.
+The NIC has a predictable name rather than `eth0` (for example `enp0s8`). The installed system boots Oracle's UEK kernel by default.
 
 Turning the result into a reusable image needs an extra sealing step and isn't covered here. A snapshot taken as-is gives every clone the same `machine-id`.
 

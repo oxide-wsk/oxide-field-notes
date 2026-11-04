@@ -79,7 +79,7 @@ xorriso -osirrox on -indev "$input" \
 	-extract /images/efiboot.img "$work/efiboot.img" >/dev/null
 chmod u+w "$work/grub.cfg" "$work/efiboot.img"
 
-# Same edits as OL7-SERIAL-ISO-ON-OXIDE.md, plus inst.ks pointing at the
+# Serial console for the installer menu and kernel, plus inst.ks pointing at the
 # kickstart embedded on the ISO itself.
 sed --in-place \
 	--expression 's/^set default="1"/set default="0"/' \
@@ -94,7 +94,7 @@ grep --quiet 'inst.ks=' "$work/grub.cfg" || {
 }
 
 # The UEFI path boots from a nested FAT image with its own grub.cfg. Patch in
-# place with mtools; rebuilding it with hdiutil adds an MBR the original lacks.
+# place with mtools so the image keeps its original layout.
 mdel -i "$work/efiboot.img" ::/EFI/BOOT/grub.cfg
 mcopy -i "$work/efiboot.img" "$work/grub.cfg" ::/EFI/BOOT/grub.cfg
 
